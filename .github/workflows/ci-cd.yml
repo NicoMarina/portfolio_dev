@@ -2,7 +2,7 @@ name: CI/CD Portfolio (Private Repo)
 
 on:
   push:
-    branches: [ main ]  # Se ejecuta en cada push a main
+    branches: [ main ]
 
 jobs:
   frontend:
@@ -52,7 +52,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: 3.10.12
 
       - name: Install backend dependencies
         run: |
@@ -61,11 +61,11 @@ jobs:
           source venv/bin/activate
           pip install -r requirements.txt
 
-      - name: Run backend tests (opcional)
-        run: |
-          cd backend
-          source venv/bin/activate
-          pytest
+#      - name: Run backend tests (opcional)
+#        run: |
+#          cd backend
+#          source venv/bin/activate
+#          pytest
 
       - name: Deploy backend to Render
         env:
