@@ -1,7 +1,7 @@
 # Portfolio Project
 
-[![GitHub](https://img.shields.io/badge/GitHub-Repo-black?style=flat-square&logo=github)](https://github.com/yourusername/portfolio)
-[![CI/CD](https://img.shields.io/badge/CI-CD-blue?style=flat-square)](https://github.com/yourusername/portfolio/actions)
+[![GitHub](https://img.shields.io/badge/GitHub-Repo-black?style=flat-square&logo=github)](https://github.com/NicoMarina/portfolio_dev)
+[![CI/CD](https://img.shields.io/badge/CI-CD-blue?style=flat-square)](https://github.com/NicoMarina/portfolio_dev/actions)
 
 This repository contains a **single-page portfolio project** built with **Next.js (React) and Tailwind CSS** for the frontend and **FastAPI (Python)** for the backend.  
 The project dynamically fetches project data from **GitHub** and **Confluence** APIs.
