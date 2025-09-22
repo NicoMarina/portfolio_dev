@@ -1,19 +1,12 @@
+/* globals.css */
 @import "tailwindcss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/utilities";
 
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: Arial, Helvetica, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,5 +19,40 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* Sections are initially hidden and translated down */
+section {
+  @apply py-16 px-8 md:px-16 opacity-0 translate-y-8;
+  @apply transition-all duration-700 ease-out;
+}
+
+/* When 'visible' class is added, sections become fully visible */
+section.visible {
+  @apply opacity-100 translate-y-0;
+}
+
+h2 {
+  @apply text-3xl font-bold mb-6;
+}
+
+p {
+  @apply text-gray-700 mb-4 leading-relaxed;
+}
+
+#hero {
+  @apply flex flex-col items-center justify-center min-h-screen bg-gray-100 pt-24;
+}
+
+#about {
+  @apply bg-white;
+}
+
+#projects {
+  @apply bg-gray-50;
+}
+
+#contact {
+  @apply bg-white;
 }
