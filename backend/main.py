@@ -1,21 +1,21 @@
 from fastapi import FastAPI
-from services.confluence import get_confluence_projects
-from services.github import get_github_repos
+from fastapi.middleware.cors import CORSMiddleware
+from app.api.v1 import about
 
-app = FastAPI(title="Portfolio API")
+app = FastAPI(title="Portfolio API", version="1.0")
 
-@app.get("/api/projects")
-async def projects():
-    confluence_data = await get_confluence_projects()
-    github_data = await get_github_repos()
-    return {"confluence": confluence_data, "github": github_data}
+# Allow only frontend domain
+origins = [
+    "https://tu-frontend.onrender.com",
+]
 
-@app.get("/api/about")
-async def about():
-    # Aquí puedes devolver bio fija o también traerla de Confluence
-    return {
-        "name": "Marina Nicolau Valls",
-        "role": "Backend Engineer",
-        "location": "Sabadell, Barcelona",
-        "skills": ["Python", "Django", "Laravel", "SQL", "REST APIs", "React"],
-    }
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Include routes
+app.include_router(about.router, prefix="/api/v1")
