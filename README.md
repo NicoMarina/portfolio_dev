@@ -3,7 +3,6 @@
 [![GitHub](https://img.shields.io/badge/GitHub-Repo-black?style=flat-square&logo=github)](https://github.com/NicoMarina/portfolio_dev)
 [![CI/CD](https://github.com/NicoMarina/portfolio_dev/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/NicoMarina/portfolio_dev/actions/workflows/ci-cd.yml)
 
-
 This repository contains a **single-page portfolio project** built with **Next.js (React) and Tailwind CSS** for the frontend and **FastAPI (Python)** for the backend.  
 The project dynamically fetches project data from **GitHub** and **Confluence** APIs.
 
@@ -65,3 +64,4 @@ npm run dev
 - GitHub Actions can automatically deploy the frontend (Vercel) and backend (Render/Heroku) on push to main.
 
 - This setup allows showcasing commits and deployment workflow directly in the repository.
+  
