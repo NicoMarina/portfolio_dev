@@ -1,13 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.v1 import about
+from app.core.config import settings
 
 app = FastAPI(title="Portfolio API", version="1.0")
 
 # Allow only frontend domain
-origins = [
-    "https://tu-frontend.onrender.com",
-]
+origins = settings.ALLOWED_FRONTEND_ORIGINS
 
 app.add_middleware(
     CORSMiddleware,

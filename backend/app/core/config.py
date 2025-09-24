@@ -5,7 +5,7 @@ class Settings(BaseSettings):
     CONFLUENCE_USER: str
     CONFLUENCE_API_TOKEN: str
     FRONTEND_API_KEY: str | None = None
-    ALLOWED_FRONTEND_ORIGINS: list[str] = ["http://localhost:3000"]
+    ALLOWED_FRONTEND_ORIGINS: list[str]
 
     class Config:
         env_file = ".env"
