@@ -2,7 +2,6 @@
 @import "tailwindcss";
 @import "tailwindcss/utilities";
 
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -46,7 +45,8 @@ p {
 }
 
 #about {
-  @apply bg-white;
+  @apply p-8 bg-white rounded-lg shadow-md max-w-6xl mx-auto;
+  font-size: 14px;
 }
 
 #projects {
