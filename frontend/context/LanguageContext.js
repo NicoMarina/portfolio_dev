@@ -1,9 +1,9 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-import en from "@/locales/en";
-import es from "@/locales/es";
-import ca from "@/locales/ca";
+import en from "../locales/en";
+import es from "../locales/es";
+import ca from "../locales/ca";
 
 const translationsMap = { en, es, ca };
 

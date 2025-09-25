@@ -1,7 +1,7 @@
 "use client";
 
-import { useLanguage } from "@/context/LanguageContext";
-import AboutMe from "@/components/AboutMe";
+import { useLanguage } from "../../context/LanguageContext";
+import AboutMe from "../../components/AboutMe";
 
 export default function UnderConstruction() {
   const { lang, translations } = useLanguage();
