@@ -1,0 +1,27 @@
+export async function GET(req) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const lang = searchParams.get("lang") || "en";
+
+    // Fetch seguro al backend usando la API key en el servidor
+    const res = await fetch(`${process.env.API_URL}/about?lang=${lang}`, {
+      headers: {
+        "x-api-key": process.env.FRONTEND_API_KEY || "",
+      },
+    });
+
+    if (!res.ok) {
+      return new Response(JSON.stringify({ error: "Error fetching content" }), { status: 500 });
+    }
+
+    const data = await res.json();
+
+    return new Response(JSON.stringify({ content: data.content }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (err) {
+    console.error("Error in /api/about:", err);
+    return new Response(JSON.stringify({ error: "Server error" }), { status: 500 });
+  }
+}
