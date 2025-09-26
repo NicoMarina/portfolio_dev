@@ -1,5 +1,11 @@
 export default {
-  underConstruction: "🚧 Portfolio under construction 🚧",
+  underConstruction: "🚧 Under Construction 🚧",
   viewRepo: "View Portfolio Repo",
-  description: "While I build the portfolio, you can check the repository."
+  description: "While I build the portfolio, you can check the repository.",
+  menu: {
+    home: "Home",
+    about: "About",
+    projects: "Projects",
+    contact: "Contact"
+  }
 };

@@ -1,9 +1,9 @@
 "use client";
 
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "@/context/LanguageContext";
 
-export default function LanguageSelector() {
-  const { lang, setLang } = useLanguage();
+export default function LanguageSelector({ fetchAboutMe }) {
+  const { lang, changeLanguage, isLoading } = useLanguage();
 
   const languages = [
     { code: "en", label: "EN" },
@@ -16,12 +16,16 @@ export default function LanguageSelector() {
       {languages.map((l) => (
         <button
           key={l.code}
-          onClick={() => setLang(l.code)}
-          className={`px-3 py-1 rounded-lg text-sm font-medium transition ${
-            lang === l.code
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-gray-800 hover:bg-gray-300"
-          }`}
+          onClick={() => !isLoading && changeLanguage(l.code, fetchAboutMe)}
+          disabled={isLoading}
+          className={`px-4 py-2 md:px-3 md:py-1 rounded-lg text-sm font-semibold transition-all duration-300 transform
+            ${
+              lang === l.code
+                ? "bg-[#358FAB] text-white scale-105 shadow-md"
+                : "bg-white/70 text-gray-800 hover:bg-[#358FAB]/80 hover:text-white"
+            }
+            ${isLoading ? "opacity-50 cursor-not-allowed" : ""}
+          `}
         >
           {l.label}
         </button>
