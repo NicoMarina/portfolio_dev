@@ -31,17 +31,3 @@ frontend/yarn-error.log*
 frontend/.pnp.*
 frontend/.DS_Store
 frontend/package-lock.json
-
-# ======================
-# OS / Misc
-# ======================
-.DS_Store
-Thumbs.db
-
-# ======================
-# IDEs
-# ======================
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
