@@ -8,8 +8,8 @@ import Footer from '../components/Footer';
 
 // Metadata for the page (used by Next.js for head tags)
 export const metadata = {
-  title: 'Marina Nicolau Portfolio',
-  description: 'Backend Engineer',
+  title: 'Marina Nicolau - Portfolio',
+  description: 'Backend Developer',
 };
 
 // RootLayout component wraps the entire app
