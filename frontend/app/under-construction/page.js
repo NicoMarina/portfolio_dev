@@ -29,8 +29,9 @@ export default function UnderConstruction() {
       {/* Main content */}
       <div className="relative z-10 flex flex-col items-center justify-center text-center w-full max-w-5xl space-y-6">
         {/* Under Construction Notice */}
-        <h1 className="text-3xl md:text-5xl font-extrabold animate-pulse">
-          {translations.underConstruction}
+        <h1 className="relative text-3xl md:text-5xl font-extrabold mb-6 text-white text-center">
+          <span className="relative z-10"> {translations.underConstruction} </span>
+          <span className="absolute inset-0 bg-[#358fab] rounded-lg transform -skew-y-2 opacity-70 z-0"></span>
         </h1>
 
         {/* About Me section */}
@@ -39,7 +40,7 @@ export default function UnderConstruction() {
         </div>
 
         {/* Description */}
-        <p className="max-w-xl mx-auto animate-fadeIn">
+        <p className="max-w-xl mx-auto font-bold animate-fadeIn">
           {translations.description}
         </p>
 
