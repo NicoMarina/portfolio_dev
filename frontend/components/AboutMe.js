@@ -63,4 +63,7 @@ const AboutMe = forwardRef((props, ref) => {
   );
 });
 
+// Set displayName to fix ESLint warning
+AboutMe.displayName = "AboutMe";
+
 export default AboutMe;
