@@ -1,17 +1,14 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import LanguageSelector from "../../components/LanguageSelector";
-import { LanguageProvider, useLanguage } from "../../context/LanguageContext";
-
-function Wrapper() {
-  const { lang, setLang } = useLanguage();
-  return <LanguageSelector lang={lang} setLang={setLang} />;
-}
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import LanguageSelector from "@/components/LanguageSelector";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 describe("LanguageSelector", () => {
+  const mockFetchAboutMe = jest.fn().mockResolvedValue({ about: "Mock AboutMe" });
+
   it("renders all languages", () => {
     render(
       <LanguageProvider>
-        <Wrapper />
+        <LanguageSelector fetchAboutMe={mockFetchAboutMe} />
       </LanguageProvider>
     );
 
@@ -20,16 +17,19 @@ describe("LanguageSelector", () => {
     expect(screen.getByText("CA")).toBeInTheDocument();
   });
 
-  it("changes language when clicked", () => {
+  it("changes language when clicked", async () => {
     render(
       <LanguageProvider>
-        <Wrapper />
+        <LanguageSelector fetchAboutMe={mockFetchAboutMe} />
       </LanguageProvider>
     );
 
     const esButton = screen.getByText("ES");
     fireEvent.click(esButton);
 
-    expect(esButton).toHaveClass("bg-blue-600 text-white");
+    // wait until React finishes state updates
+    await waitFor(() => {
+      expect(esButton).toHaveClass("bg-[#358FAB] text-white");
+    });
   });
 });

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import Navbar from "../../components/Navbar";
-import { LanguageProvider } from "../../context/LanguageContext";
+import Navbar from "@/components/Navbar";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 describe("Navbar", () => {
   it("renders navigation links", () => {
@@ -10,6 +10,7 @@ describe("Navbar", () => {
       </LanguageProvider>
     );
 
+    // Verifica los links principales
     // expect(screen.getByText("Home")).toBeInTheDocument();
     // expect(screen.getByText("About")).toBeInTheDocument();
     // expect(screen.getByText("Projects")).toBeInTheDocument();
@@ -23,8 +24,13 @@ describe("Navbar", () => {
       </LanguageProvider>
     );
 
-    expect(screen.getByText("EN")).toBeInTheDocument();
-    expect(screen.getByText("ES")).toBeInTheDocument();
-    expect(screen.getByText("CA")).toBeInTheDocument();
+    // Usamos getAllByText porque hay botones duplicados (desktop + mobile)
+    const enButtons = screen.getAllByText("EN");
+    const esButtons = screen.getAllByText("ES");
+    const caButtons = screen.getAllByText("CA");
+
+    expect(enButtons.length).toBeGreaterThan(0);
+    expect(esButtons.length).toBeGreaterThan(0);
+    expect(caButtons.length).toBeGreaterThan(0);
   });
 });

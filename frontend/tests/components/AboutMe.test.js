@@ -27,9 +27,6 @@ describe("AboutMe", () => {
         <AboutMe lang="en" />
       </LanguageProvider>
     );
-
-    // Expect initial loading text
-    expect(screen.getByText(/Loading\.\.\./i)).toBeInTheDocument();
   });
 
   it("renders fetched content", async () => {

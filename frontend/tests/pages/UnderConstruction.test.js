@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import UnderConstruction from "../../app/under-construction/page";
-import { LanguageProvider } from "../../context/LanguageContext";
+import UnderConstruction from "@/app/under-construction/page";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 // Mock de AboutMe para no hacer fetch real
 jest.mock("@/components/AboutMe", () => () => <div>Mock AboutMe</div>);
@@ -14,7 +14,7 @@ describe("UnderConstruction Page", () => {
     );
 
     expect(
-      screen.getByText("🚧 Portfolio under construction 🚧")
+      screen.getByText("🚧 Under Construction 🚧")
     ).toBeInTheDocument();
 
     const link = screen.getByRole("link", { name: /View Portfolio Repo/i });
