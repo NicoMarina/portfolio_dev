@@ -13,8 +13,18 @@ class ContentRepository(ABC):
         pass
 
     @abstractmethod
+    async def find_descendant_folder_id(self, parent_id: str, title: str) -> Optional[str]:
+        """Search descendant folders by title under a parent, return folder id if found."""
+        pass
+
+    @abstractmethod
     async def find_descendant_page_id(self, parent_id: str, title: str) -> Optional[str]:
         """Search descendant pages by title under a parent, return page id if found."""
+        pass
+
+    @abstractmethod
+    async def list_child_folders(self, parent_id: str) -> List[Dict]:
+        """Return list of direct child folders (metadata)."""
         pass
 
     @abstractmethod
