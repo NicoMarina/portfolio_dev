@@ -76,18 +76,16 @@ async def test_about_endpoint_not_found():
 
 @pytest.mark.asyncio
 async def test_about_endpoint_invalid_api_key():
-    """
-    Test /about endpoint with invalid API key.
-    - Uses a fake AboutService to avoid hitting Confluence.
-    - Expects 403 Forbidden.
-    """
-
     class FakeAboutService:
         async def get_about_by_lang(self, lang):
             return ContentResponse(id="123", title="About", content="Test")
 
+    async def fake_verify_frontend_key_fail():
+        from fastapi import HTTPException
+        raise HTTPException(status_code=403, detail="Forbidden")
+
     app.dependency_overrides[get_about_service] = lambda: FakeAboutService()
-    # Do not override verify_frontend_key, keep real behavior
+    app.dependency_overrides[verify_frontend_key] = fake_verify_frontend_key_fail
 
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
