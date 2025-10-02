@@ -1,35 +1,44 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import LanguageSelector from "@/components/LanguageSelector";
-import { LanguageProvider } from "@/context/LanguageContext";
+
+// Create a persistent mock function for changeLanguage
+const mockChangeLanguage = jest.fn();
+
+// Mock useLanguage hook
+jest.mock("@/context/LanguageContext", () => ({
+  useLanguage: () => ({
+    lang: "en",               // Current language
+    changeLanguage: mockChangeLanguage, // Use our persistent mock
+    isLoading: false,
+  }),
+}));
 
 describe("LanguageSelector", () => {
-  const mockFetchAboutMe = jest.fn().mockResolvedValue({ about: "Mock AboutMe" });
-
-  it("renders all languages", () => {
-    render(
-      <LanguageProvider>
-        <LanguageSelector fetchAboutMe={mockFetchAboutMe} />
-      </LanguageProvider>
-    );
-
-    expect(screen.getByText("EN")).toBeInTheDocument();
-    expect(screen.getByText("ES")).toBeInTheDocument();
-    expect(screen.getByText("CA")).toBeInTheDocument();
+  afterEach(() => {
+    jest.clearAllMocks(); // Clear mock call history after each test
   });
 
-  it("changes language when clicked", async () => {
-    render(
-      <LanguageProvider>
-        <LanguageSelector fetchAboutMe={mockFetchAboutMe} />
-      </LanguageProvider>
-    );
+  it("highlights the active language and calls changeLanguage when clicking another language", () => {
+    // Mock fetchAboutMe callback
+    const mockFetchAboutMe = jest.fn();
 
+    // Render the LanguageSelector component
+    render(<LanguageSelector fetchAboutMe={mockFetchAboutMe} />);
+
+    // Get buttons
+    const enButton = screen.getByText("EN");
     const esButton = screen.getByText("ES");
+    const caButton = screen.getByText("CA");
+
+    // Check that the current language has the "active" class
+    expect(enButton).toHaveClass("active");
+    expect(esButton).toHaveClass("inactive");
+    expect(caButton).toHaveClass("inactive");
+
+    // Click the ES button
     fireEvent.click(esButton);
 
-    // wait until React finishes state updates
-    await waitFor(() => {
-      expect(esButton).toHaveClass("bg-[#358FAB] text-white");
-    });
+    // Verify that changeLanguage was called with the correct arguments
+    expect(mockChangeLanguage).toHaveBeenCalledWith("es", mockFetchAboutMe);
   });
 });
