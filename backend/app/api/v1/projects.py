@@ -19,7 +19,7 @@ def get_project_service() -> ProjectService:
     response_model=List[ContentResponse]
 )
 async def get_projects(
-    lang: str = Query("en", regex="^(en|es|ca)$"),
+    lang: str = Query("en", pattern="^(en|es|ca)$"),
     _ = Depends(verify_frontend_key),
     service: ProjectService = Depends(get_project_service),
 ):
@@ -30,6 +30,8 @@ async def get_projects(
         return results
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
+    except HTTPException:
+        # Preserve expected HTTP exceptions (404, 403, etc.)
+        raise
     except Exception:
-        # TODO: add logging here
         raise HTTPException(status_code=500, detail="Internal error fetching projects")
