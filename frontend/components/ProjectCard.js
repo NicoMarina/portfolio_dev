@@ -1,39 +1,45 @@
 "use client";
 
-// ProjectCard component to display individual project information
+import { useState } from "react";
+
 export default function ProjectCard({ project }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  if (!project) return null;
+
   return (
-    // Card container with Tailwind classes for styling and hover effects
-    <div className="bg-white border border-gray-200 rounded-xl shadow-md p-6
-                    hover:shadow-2xl hover:-translate-y-2 hover:scale-105
-                    transition transform duration-300 ease-in-out">
-      {/* Project name */}
-      <h3 className="text-xl font-semibold text-gray-800 mb-2">{project.name}</h3>
-      {/* Project description */}
-      <p className="text-gray-600 mb-4">{project.description}</p>
-      {/* Links container */}
-      <div className="flex space-x-4 mt-2">
-        {/* GitHub link */}
-        <a
-          href={project.github}
-          target="_blank"
-          rel="noreferrer"
-          className="text-blue-600 hover:text-blue-800 hover:underline font-medium transition-colors duration-300"
+    <>
+      {/* Card */}
+      <div className="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between transition hover:shadow-xl">
+        <h3 className="text-xl md:text-2xl font-bold mb-4 text-gray-800">
+          {project.title}
+        </h3>
+        <button
+          onClick={() => setIsOpen(true)}
+          className="mt-auto px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
         >
-          GitHub
-        </a>
-        {/* Optional demo link, only rendered if project.demo exists */}
-        {project.demo && (
-          <a
-            href={project.demo}
-            target="_blank"
-            rel="noreferrer"
-            className="text-blue-600 hover:text-blue-800 hover:underline font-medium transition-colors duration-300"
-          >
-            Demo
-          </a>
-        )}
+          Leer más
+        </button>
       </div>
-    </div>
+
+      {/* Modal / Popup */}
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white rounded-lg shadow-lg max-w-3xl w-full p-6 relative overflow-y-auto max-h-[80vh]">
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-xl font-bold"
+            >
+              ×
+            </button>
+            <h3 className="text-2xl font-bold mb-4">{project.title}</h3>
+            <div
+              className="prose max-w-none"
+              dangerouslySetInnerHTML={{ __html: project.content }}
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
