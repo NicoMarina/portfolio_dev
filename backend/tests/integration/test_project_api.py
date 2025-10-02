@@ -61,8 +61,12 @@ async def test_projects_endpoint_invalid_api_key():
         async def get_projects_by_lang(self, lang):
             return [ContentResponse(id="1", title="Project 1", content="Test")]
 
-    # No override of verify_frontend_key, real API key check applies
+    async def fake_verify_frontend_key_fail():
+        from fastapi import HTTPException
+        raise HTTPException(status_code=403, detail="Forbidden")
+
     app.dependency_overrides[get_project_service] = lambda: FakeProjectService()
+    app.dependency_overrides[verify_frontend_key] = fake_verify_frontend_key_fail
 
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
