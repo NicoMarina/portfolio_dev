@@ -4,15 +4,16 @@ import { useState, useEffect, forwardRef, useImperativeHandle } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 
 const AboutMe = forwardRef((props, ref) => {
-  const { lang } = useLanguage();
-  const [content, setContent] = useState(""); // Empty by default
+  const { lang, translations } = useLanguage();
+  const [content, setContent] = useState("");
   const [error, setError] = useState(false);
   const [fade, setFade] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Expose fetchContent for LanguageSelector
   useImperativeHandle(ref, () => ({
     fetchContent: async (newLang) => {
       try {
+        setIsLoading(true);
         const res = await fetch(`/api/about?lang=${newLang}`);
         if (!res.ok) throw new Error("Error fetching content");
         const data = await res.json();
@@ -24,11 +25,12 @@ const AboutMe = forwardRef((props, ref) => {
       } catch (err) {
         console.error(err);
         setError(true);
+      } finally {
+        setIsLoading(false);
       }
     },
   }));
 
-  // Initial load in default language (English)
   useEffect(() => {
     let isCancelled = false;
 
@@ -40,30 +42,57 @@ const AboutMe = forwardRef((props, ref) => {
         if (!isCancelled) {
           setContent(data.content);
           setFade(false);
+          setIsLoading(false);
         }
       } catch (err) {
         console.error(err);
         if (!isCancelled) setError(true);
+        setIsLoading(false);
       }
     }
 
     fetchInitial();
-
     return () => { isCancelled = true; };
   }, []);
 
-  if (error) return <div id="about">Error loading content.</div>;
+  if (error) return <section id="about">Error loading content.</section>;
 
   return (
-    <div id="about" className="max-w-5xl mx-auto px-6 py-16">
-      <div
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
-    </div>
+    <section id="about" className={`about-section ${fade ? "fade" : ""}`}>
+      <h2>
+        <span>{translations.menu.about}</span>
+      </h2>
+
+      {isLoading ? (
+        <div className="space-y-4 animate-pulse">
+          <div className="h-4 bg-white/20 rounded w-11/12"></div>
+          <div className="h-4 bg-white/20 rounded w-full"></div>
+          <div className="h-4 bg-white/20 rounded w-5/6"></div>
+          <div className="h-4 bg-white/20 rounded w-4/6"></div>
+        </div>
+      ) : (
+        <div
+          id="about">
+          <div className="grid md:grid-cols-2 items-center">
+            <div className="flex justify-center md:justify-start">
+              <img
+                src="/me.png"
+                alt="About me"
+                className="w-full max-w-sm md:max-w-md object-cover"
+              />
+            </div>
+
+            {/* Dinamic text */}
+            <div
+              className="about-content"
+              dangerouslySetInnerHTML={{ __html: content }}
+            />
+          </div>
+        </div>
+      )}
+    </section>
   );
 });
 
-// Set displayName to fix ESLint warning
 AboutMe.displayName = "AboutMe";
-
 export default AboutMe;
