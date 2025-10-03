@@ -5,7 +5,10 @@ import Footer from '@/components/Footer';
 
 export const metadata = {
   title: 'Marina Nicolau - Portfolio',
-  description: 'Backend Developer',
+  description: 'Software Developer',
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }) {
