@@ -6,12 +6,15 @@ export default {
     home: "Inicio",
     about: "Sobre mí",
     projects: "Proyectos",
-    contact: "Contacto"
+    // contact: "Contacto"
   },
   welcome: "Bienvenido/a al",
   webPortfolio: "portafolio web",
   of: "de",
   rol: "Desarrolladora de software",
   heroText: "Apasionada por construir sistemas backend escalables, optimizar procesos y crear soluciones digitales de impacto.",
-  linkedin: "Conecta en LinkedIn"
+  linkedin: "Conecta en LinkedIn",
+  readMore: "Leer más",
+  some: "Algunos",
+  someProjects: "Proyectos",
 };

@@ -17,7 +17,7 @@ export function LanguageProvider({ children }) {
     if (isLoading) return; // prevent multiple clicks
     setIsLoading(true);
     try {
-      // await fetchAboutMe(newLang); // fetch AboutMe content first
+      await fetchAboutMe(newLang); // fetch AboutMe content first
       setLang(newLang);            // update global language only after fetch
     } catch (err) {
       console.error("Error loading language content:", err);
