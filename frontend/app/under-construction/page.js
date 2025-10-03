@@ -13,7 +13,6 @@ export default function UnderConstruction() {
     {/* Navbar */}
     <Navbar />
 
-    {/* Contenido principal centrado */}
     <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-6xl w-full mx-auto">
       
       {/* Under Construction Notice */}
