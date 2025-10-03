@@ -1,9 +1,9 @@
 import React from "react";
-import { render, screen, waitFor, act } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import Projects from "@/components/Projects";
+import { LanguageProvider } from "@/context/LanguageContext";
 import '@testing-library/jest-dom';
 
-// Mock global fetch to simulate API calls
 global.fetch = jest.fn();
 
 const mockProjects = [
@@ -13,22 +13,42 @@ const mockProjects = [
 
 describe("Projects component", () => {
   beforeEach(() => {
-    fetch.mockClear(); // Clear mock history before each test
+    fetch.mockClear();
   });
 
-  it("renders project cards after successful fetch", async () => {
-    // Simulate successful fetch
+  it("shows loading skeleton initially", async () => {
     fetch.mockResolvedValueOnce({
       ok: true,
       json: async () => mockProjects,
     });
 
-    // Wrap in act to handle state updates correctly
-    await act(async () => {
-      render(<Projects lang="en" />);
+    const { container } = render(
+      <LanguageProvider>
+        <Projects lang="en" />
+      </LanguageProvider>
+    );
+
+    // Check for skeleton loader
+    expect(container.querySelector(".animate-pulse")).toBeInTheDocument();
+
+    // Wait for fetch to complete and skeleton to disappear
+    await waitFor(() => {
+      expect(container.querySelector(".animate-pulse")).not.toBeInTheDocument();
+    });
+  });
+
+  it("renders project cards after successful fetch", async () => {
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockProjects,
     });
 
-    // Wait for projects to appear in the DOM
+    render(
+      <LanguageProvider>
+        <Projects lang="en" />
+      </LanguageProvider>
+    );
+
     await waitFor(() => {
       expect(screen.getByText("Django")).toBeInTheDocument();
       expect(screen.getByText("Laravel")).toBeInTheDocument();
@@ -36,31 +56,31 @@ describe("Projects component", () => {
   });
 
   it("shows error message when fetch fails", async () => {
-    // Simulate fetch failure (ok: false)
     fetch.mockResolvedValueOnce({ ok: false });
 
-    await act(async () => {
-      render(<Projects lang="en" />);
-    });
+    render(
+      <LanguageProvider>
+        <Projects lang="en" />
+      </LanguageProvider>
+    );
 
-    // Check that the error message is displayed
     await waitFor(() => {
       expect(screen.getByText(/error loading projects/i)).toBeInTheDocument();
     });
   });
 
   it("handles empty projects array gracefully", async () => {
-    // Simulate fetch returning empty array
     fetch.mockResolvedValueOnce({
       ok: true,
       json: async () => [],
     });
 
-    await act(async () => {
-      render(<Projects lang="en" />);
-    });
+    render(
+      <LanguageProvider>
+        <Projects lang="en" />
+      </LanguageProvider>
+    );
 
-    // Check that the 'no projects found' message is displayed
     await waitFor(() => {
       expect(screen.getByText(/no projects found/i)).toBeInTheDocument();
     });
