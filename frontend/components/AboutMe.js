@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, forwardRef, useImperativeHandle } from "react";
+import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 
 const AboutMe = forwardRef((props, ref) => {
@@ -75,9 +76,11 @@ const AboutMe = forwardRef((props, ref) => {
           id="about">
           <div className="grid md:grid-cols-2 items-center">
             <div className="flex justify-center md:justify-start">
-              <img
+              <Image
                 src="/me.png"
                 alt="About me"
+                width={400}
+                height={400}
                 className="w-full max-w-sm md:max-w-md object-cover"
               />
             </div>

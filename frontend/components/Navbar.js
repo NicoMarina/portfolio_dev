@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import LanguageSelector from "./LanguageSelector";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -27,7 +28,7 @@ export default function Navbar({ fetchAboutMe }) {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex justify-between items-center h-16">
         <div className="font-extrabold text-xl">
           {/* Logo */}
-          <a
+          <Link
             href="/"
             className="text-white cursor-pointer"
           >
@@ -35,7 +36,7 @@ export default function Navbar({ fetchAboutMe }) {
               <span className="text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-blue-700">
                   {" "}Nicolau
               </span>
-          </a>
+          </Link>
         </div>
         {/* Desktop menu */}
         <div className="menu hidden md:flex space-x-8 items-center">
