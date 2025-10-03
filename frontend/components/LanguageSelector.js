@@ -18,14 +18,7 @@ export default function LanguageSelector({ fetchAboutMe }) {
           key={l.code}
           onClick={() => !isLoading && changeLanguage(l.code, fetchAboutMe)}
           disabled={isLoading}
-          className={`px-4 py-2 md:px-3 md:py-1 rounded-lg text-sm font-semibold transition-all duration-300 transform
-            ${
-              lang === l.code
-                ? "bg-[#358FAB] text-white scale-105 shadow-md"
-                : "bg-white/70 text-gray-800 hover:bg-[#358FAB]/80 hover:text-white"
-            }
-            ${isLoading ? "opacity-50 cursor-not-allowed" : ""}
-          `}
+          className={`lang-btn ${lang === l.code ? "active" : "inactive"}`}
         >
           {l.label}
         </button>
