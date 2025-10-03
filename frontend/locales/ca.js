@@ -7,5 +7,11 @@ export default {
     about: "Sobre mi",
     projects: "Projectes",
     contact: "Contacte"
-  }
+  },
+  welcome: "Benvingut/uda al",
+  webPortfolio: "portafoli web",
+  of: "de",
+  rol: "Desenvolupadora de programari",
+  heroText: "Apassionada per construir sistemes backend escalables, optimitzar processos i crear solucions digitals d'impacte.",
+  linkedin: "Connecta a LinkedIn"
 };

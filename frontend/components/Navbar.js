@@ -24,32 +24,21 @@ export default function Navbar({ fetchAboutMe }) {
   ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        scrolled ? "bg-white shadow-lg" : "bg-transparent"
-      }`}
-    >
+    <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex justify-between items-center h-16">
         {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center space-x-2 hover:text-blue-600 transition-colors duration-300"
-        >
+        <Link href="/" className="logo">
           <img
             src="/logo.png"
             alt="Logo"
-            className="w-25 h-25 sm:w-10 sm:h-10 md:w-30 md:h-30 object-contain"
+            className="w-10 h-10 sm:w-10 sm:h-10 md:w-12 md:h-12 object-contain"
           />
         </Link>
 
         {/* Desktop menu */}
-        <div className="hidden md:flex space-x-8 items-center">
+        <div className="menu hidden md:flex space-x-8 items-center">
           {/* {menuItems.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-300"
-            >
+            <a key={item.id} href={`#${item.id}`}>
               {item.label}
             </a>
           ))} */}
@@ -57,9 +46,9 @@ export default function Navbar({ fetchAboutMe }) {
         </div>
 
         {/* Mobile menu button */}
-        {/* <div className="md:hidden flex items-center">
+        <div className="md:hidden flex items-center">
           <LanguageSelector fetchAboutMe={fetchAboutMe} />
-          <button
+          {/* <button
             onClick={() => setIsOpen(!isOpen)}
             className="ml-2 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
           >
@@ -79,8 +68,8 @@ export default function Navbar({ fetchAboutMe }) {
                 isOpen ? "-rotate-45 -translate-y-1.5" : ""
               }`}
             />
-          </button>
-        </div> */}
+          </button> */}
+        </div>
       </div>
 
       {/* Mobile menu */}

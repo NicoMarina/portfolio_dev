@@ -3,9 +3,11 @@
 @import "tailwindcss/utilities";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --font-sans: Arial, Helvetica, sans-serif;
+  --background: #0A0A0A;
+  --foreground: #EAEAEA;
+  --secondary: #A1A1A1;
+  --accent: #2563EB;
+  --font-sans: 'Inter', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,58 +23,163 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Sections are initially hidden and translated down */
-section {
-  @apply py-16 px-8 md:px-16 opacity-0 translate-y-8;
-  @apply transition-all duration-700 ease-out;
+/* Sections base style */
+.about-section,
+.projects-section,
+.contact-section {
+  @apply py-20 px-6 md:px-12 max-w-6xl mx-auto;
 }
 
-/* When 'visible' class is added, sections become fully visible */
-section.visible {
-  @apply opacity-100 translate-y-0;
+/* Títulos de sección */
+.about-section h2,
+.projects-section h2,
+.contact-section h2 {
+  @apply text-3xl md:text-4xl font-bold mb-8 text-center;
+  color: var(--foreground);
 }
 
-h2 {
-  @apply text-3xl font-bold mb-6;
+/* Subrayado con gradiente azul */
+.about-section h2 span,
+.projects-section h2 span,
+.contact-section h2 span {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-700;
 }
 
-p {
-  @apply mb-4 leading-relaxed;
+.navbar {
+  @apply fixed top-0 left-0 w-full z-50 transition-all duration-500;
+  background: transparent;
+}
+.navbar.scrolled {
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-#hero {
-  @apply flex flex-col items-center justify-center min-h-screen bg-gray-100 pt-24;
+.navbar .logo {
+  @apply flex items-center space-x-2 transition-colors duration-300;
+}
+.navbar .logo:hover {
+  color: var(--accent);
+}
+
+.navbar .menu a {
+  @apply text-[var(--foreground)] transition-colors duration-300;
+}
+.navbar .menu a:hover {
+  color: var(--accent);
 }
 
 #about {
-  @apply p-8 bg-white/80 backdrop-blur-md rounded-lg shadow-md max-w-6xl mx-auto text-gray-800 transition-all duration-500 ;
-  font-size: 14px;
+  @apply relative max-w-6xl mx-auto px-6 py-16;
 }
 
+.about-title {
+  @apply text-2xl md:text-3xl font-bold mb-6 text-left;
+  background: linear-gradient(to right, #2563EB, #1D4ED8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.about-content {
+  @apply bg-white/5 backdrop-blur-lg rounded-2xl shadow-xl p-8 md:p-12 text-left text-base md:text-lg leading-relaxed text-[var(--foreground)] space-y-6;
+}
+
+.about-section.fade {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.lang-btn {
+  @apply px-3 py-1 rounded-lg text-sm font-semibold transition-all duration-300 transform;
+}
+.lang-btn.active {
+  background: var(--accent);
+  color: white;
+  @apply scale-105 shadow-md;
+}
+.lang-btn.inactive {
+  background: rgba(26,26,26,0.9);
+  color: var(--foreground);
+}
+.lang-btn.inactive:hover {
+  background: rgba(29, 28, 87, 0.8);
+  color: white;
+}
+.lang-btn:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* #hero {
+  @apply flex flex-col items-center justify-center min-h-screen pt-24 text-center;
+  background: var(--background);
+  color: var(--foreground);
+} */
+
+#hero {
+  @apply flex flex-col items-center justify-center pt-14 text-center;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.hero h1 {
+  @apply text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg;
+}
+
+.hero h2 {
+  @apply text-xl md:text-2xl mb-2 text-[var(--secondary)] drop-shadow-md;
+}
+
+.hero p {
+  @apply text-sm md:text-base text-[var(--secondary)] drop-shadow-md;
+}
+
+.cta-btn {
+  @apply px-6 py-3 mt-4 rounded-full font-semibold text-white bg-gradient-to-r from-blue-500 to-blue-700 shadow-lg hover:scale-105 transform transition duration-300;
+}
+.cta-btn:hover {
+  @apply scale-105 shadow-lg;
+}
+
+/* Marquee / Carrusel de TechBadges */
+.marquee {
+  @apply w-full overflow-hidden relative max-w-6xl;
+}
+
+.animate-marquee {
+  display: inline-flex; /* importante para mantener los items en línea */
+  gap: 0.2rem; /* espacio entre badges */
+  animation: marquee 52s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* recorre la primera copia completa */
+  }
+}
+
+.animate-marquee > * {
+  @apply shrink-0; /* evita que los items se encojan */
+}
+
+/* Projects Section */
 #projects {
-  @apply bg-gray-50;
+  color: #edf2f7;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease-out forwards;
+/* Project Card */
+#projects .bg-gray-800 {
+  background-color: #2d3748;
+  border-left: 4px solid #3182ce;
 }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-.animate-bounce {
-  animation: bounce 1s infinite;
+/* Project Title */
+#projects h3 {
+  color: #63b3ed;
 }
 
-@keyframes scaleUp {
-  from { transform: scale(0.95); }
-  to { transform: scale(1); }
-}
-.animate-scaleUp {
-  animation: scaleUp 0.3s ease-out forwards;
+/* Icons */
+#projects .text-blue-400 {
+  color: #63b3ed;
 }
