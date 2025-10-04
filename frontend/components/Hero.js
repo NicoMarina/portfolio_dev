@@ -18,7 +18,7 @@ export default function Hero() {
             {translations.of}
         </h2>
 
-        {/* Nombre */}
+        {/* Name */}
         <h1 className="text-white text-6xl xs:text-8xl font-extrabold leading-none sm:whitespace-nowrap tracking-tight md:text-7xl lg:text-8xl select-none">
             Marina
             <span className="text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-blue-700">
@@ -31,7 +31,7 @@ export default function Hero() {
             {translations.rol}
         </h2>
 
-        {/* Descripción */}
+        {/* Description */}
         <p className="text-gray-400 max-w-2xl text-base md:text-lg leading-relaxed mb-6">
             {translations.heroText}
         </p>
@@ -48,7 +48,7 @@ export default function Hero() {
             </a>
         </div>
 
-        {/* Carrusel de badges */}
+        {/* Badge carousel */}
         <div className="marquee mt-12">
             <div className="marquee-content">
             <TechBadges />

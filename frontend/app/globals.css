@@ -30,15 +30,15 @@ body {
   @apply py-20 px-6 md:px-12 max-w-6xl mx-auto;
 }
 
-/* Títulos de sección */
+/* Section titles */
 .about-section h2,
 .projects-section h2,
 .contact-section h2 {
-  @apply text-3xl md:text-4xl font-bold mb-8 text-center;
+  @apply text-3xl md:text-4xl font-bold text-center;
   color: var(--foreground);
 }
 
-/* Subrayado con gradiente azul */
+/* Blue gradient underline */
 .about-section h2 span,
 .projects-section h2 span,
 .contact-section h2 span {
@@ -70,18 +70,11 @@ body {
 }
 
 #about {
-  @apply relative max-w-6xl mx-auto px-6 py-16;
-}
-
-.about-title {
-  @apply text-2xl md:text-3xl font-bold mb-6 text-left;
-  background: linear-gradient(to right, #2563EB, #1D4ED8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  @apply relative max-w-7xl mx-auto px-2 py-16
 }
 
 .about-content {
-  @apply bg-white/5 backdrop-blur-lg rounded-2xl shadow-xl p-8 md:p-12 text-left text-base md:text-lg leading-relaxed text-[var(--foreground)] space-y-6;
+  @apply bg-white/5 backdrop-blur-lg rounded-2xl shadow-xl p-8 md:p-12 text-left text-base md:text-sm leading-relaxed text-[var(--foreground)] space-y-6;
 }
 
 .about-section.fade {
@@ -108,14 +101,8 @@ body {
   @apply opacity-50 cursor-not-allowed;
 }
 
-/* #hero {
-  @apply flex flex-col items-center justify-center min-h-screen pt-24 text-center;
-  background: var(--background);
-  color: var(--foreground);
-} */
-
 #hero {
-  @apply flex flex-col items-center justify-center pt-14 text-center;
+  @apply flex flex-col items-center justify-center min-h-screen pt-24 text-center;
   background: var(--background);
   color: var(--foreground);
 }
@@ -139,14 +126,14 @@ body {
   @apply scale-105 shadow-lg;
 }
 
-/* Marquee / Carrusel de TechBadges */
+/* TechBadges Marquee / Carousel */
 .marquee {
   @apply w-full overflow-hidden relative max-w-6xl;
 }
 
 .animate-marquee {
-  display: inline-flex; /* importante para mantener los items en línea */
-  gap: 0.2rem; /* espacio entre badges */
+  display: inline-flex;
+  gap: 0.2rem;
   animation: marquee 52s linear infinite;
 }
 
@@ -155,12 +142,12 @@ body {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%); /* recorre la primera copia completa */
+    transform: translateX(-50%); /* Adjust based on content width */
   }
 }
 
 .animate-marquee > * {
-  @apply shrink-0; /* evita que los items se encojan */
+  @apply shrink-0; /* Prevent shrinking of child elements */
 }
 
 /* Projects Section */
@@ -183,3 +170,4 @@ body {
 #projects .text-blue-400 {
   color: #63b3ed;
 }
+

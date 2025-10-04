@@ -15,7 +15,7 @@ The project dynamically fetches project data from **GitHub** and **Confluence** 
 - Reusable React components (Navbar, Footer, ProjectCard)
 - Responsive design with Tailwind CSS
 - Backend API with FastAPI
-- CI/CD ready for automated deployment (frontend on Vercel, backend on Render/Heroku)
+- CI/CD ready for automated deployment (frontend on Vercel, backend on Render)
 
 ---
 
